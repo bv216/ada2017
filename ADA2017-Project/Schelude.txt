@@ -1,0 +1,8 @@
+The schedule for the projects is as follows:
+
+Oct. 19, 2017: datasets for projects are announced.
+Oct. 31, 2017 (23:59 CET): milestone 1 (10%): the project repo contains a README describing your project idea (title, abstract, questions, dataset, milestones, according to a provided skeleton).
+Nov. 28, 2017 (23:59 CET): milestone 2 (20%): the project repo contains a notebook with data collection and descriptive analysis, properly commented, and the notebook ends with a more structured and informed plan for what comes next (all the way to a plan for the presentation). These sections of the notebook should be filled in by milestone 3.
+Dec. 19, 2017 (23:59 CET): report (50%): a 4-page PDF document or a data story in a platform of your choice (e.g., a blog post, or directly in GitHub), plus the final notebook (continuation of milestone 2).
+Jan. 29-30, 2018: presentation (20%) of posters and (optionally) whatever else tickles your fancy (e.g., on-screen demos); the poster session will take place at the Applied Machine Learning Days at the SwissTech convention center.
+Therefore, the bulk of your work should be over before Christmas, in order for you to focus on the exam and presentation (and exams of other classes).
