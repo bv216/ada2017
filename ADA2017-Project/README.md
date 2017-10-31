@@ -9,13 +9,13 @@ These commentary from customers are part of the success of Amazon and our study 
 
 
 # Research questions
-* Q1: How has the amount of reviews changed during time? Is this constant on every category? 
-* Q2: Relation between price of the product and the amount of reviews.
-* Q3: Relation between category of the product and the amount of reviews.
-* Q4: Evolution of the number of reviews along time. Is the amount of comments affecting to the possible new comments? Is the helpfulness of the comments affecting?
-* Q5: Are the top reviewers doing more helpful reviews? Is there any relation between top reviewers and the categories?
-* Q6: Is there relation between the popularity of the product and its commentaries?
-* Q7: Does the reviews affect the evolution of the product price?
+* **Q1**: How has the amount of reviews changed during time? Is this constant on every category? 
+* **Q2**: Relation between price of the product and the amount of reviews.
+* **Q3**: Relation between category of the product and the amount of reviews.
+* **Q4**: Evolution of the number of reviews along time. Is the amount of comments affecting to the possible new comments? Is the helpfulness of the comments affecting?
+* **Q5**: Are the top reviewers doing more helpful reviews? Is there any relation between top reviewers and the categories?
+* **Q6**: Is there relation between the popularity of the product and its commentaries?
+* **Q7**: Does the reviews affect the evolution of the product price?
 
 
 # Dataset
