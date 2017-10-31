@@ -9,10 +9,14 @@ These commentary from customers are part of the success of Amazon and our study 
 
 
 # Research questions
-* Q1 
-* Q2
+* Q1: How has the amount of reviews changed during time? Is this constant on every category? 
+* Q2: Relation between price of the product and the amount of reviews.
+* Q3: Relation between category of the product and the amount of reviews.
+* Q4: Evolution of the number of reviews along time. Is the amount of comments affecting to the possible new comments? Is the helpfulness of the comments affecting?
+* Q5: Are the top reviewers doing more helpful reviews? Is there any relation between top reviewers and the categories?
+* Q6: Is there relation between the popularity of the product and its commentaries?
+* Q7: Does the reviews affect the evolution of the product price?
 
-A list of research questions you would like to address during the project. 
 
 # Dataset
 The main dataset we are going to use is **Amazon Reviews**, where we can find the reviews done in Amazon.com from May 1996 to July 2014. Our idea is to use the _reviewerID_ to know about the top reviewers, _asin_ for recognizing products, the _reviewTime_ to know when these reviews are done, the _overall_ score to match it with the top reviewers, products and also with the _helpful_ field to see if there's any relation between scores and helpfulness. 
