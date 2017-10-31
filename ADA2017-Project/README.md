@@ -3,7 +3,10 @@ Analysis of the influence of popularity on Amazon reviews.
 
 # Abstract
 
-A 150 word description of the project idea, goals, dataset used. What story you would like to tell and why? What's the motivation behind your project?
+This project will analyze the influence of popularity on Amazon reviews from different points of views, such as popularity of the reviewer, of the product, of the amount of reviews for the product and of the helpfulness reviews. To develop it we are going to use two datasets, the main one is going to be the **Amazon Reviews Dataset** and its ¬-_metadata_ while the second, that is going to complement the first, is the **Million Song Dataset**.
+For many buyers, it’s clear that reviews are helpful and take part in their purchase decisions but we wonder who do them, is it just because of the motivation of knowing that you are helping someone? 
+These commentary from customers are part of the success of Amazon and our study will let us explore what motivates reviews and which type of buyers get more information from them. 
+
 
 # Research questions
 * Q1 
