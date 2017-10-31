@@ -6,6 +6,9 @@ Analysis of the influence of popularity on Amazon reviews.
 A 150 word description of the project idea, goals, dataset used. What story you would like to tell and why? What's the motivation behind your project?
 
 # Research questions
+* Q1 
+* Q2
+
 A list of research questions you would like to address during the project. 
 
 # Dataset
@@ -14,7 +17,7 @@ We plan to enrich this dataset with the **Million Song Dataset**, to check if th
 
 
 # A list of internal milestones up until project milestone 2
-We are planning meeting every week for 3 hours to comment our individual progress and check the project. While working on it individually contacting using Mattermost.
+We are planning meeting every week for 3 hours to comment our individual progress and check the project. While working on it individually contacting by Mattermost.
 Our calendar is going to be the following:
   > **Week 1**: Exploratory analysis of data. Starting notebook with dataframes and fixing data. 
 
