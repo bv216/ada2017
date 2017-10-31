@@ -9,8 +9,8 @@ A 150 word description of the project idea, goals, dataset used. What story you 
 A list of research questions you would like to address during the project. 
 
 # Dataset
-The main dataset we are going to use is *Amazon Reviews*, where we can find the reviews done in Amazon.com from May 1996 to July 2014. Our idea is to use the _reviewerID_ to know about the top reviewers, _asin_ for recognizing products, the _reviewTime_ to know when these reviews are done, the _overall_ score to match it with the top reviewers, products and also with the _helpful_ field to see if there's any relation between scores and helpfulness. 
-We plan to enrich this dataset with the *Million Song Dataset*, to check if the Digital Music Category products reviews are related with their popularity from the music dataset by matching the _title_ from the Song Dataset with the _title_ from _metadata_ placed in the Amazon Dataset.
+The main dataset we are going to use is **Amazon Reviews**, where we can find the reviews done in Amazon.com from May 1996 to July 2014. Our idea is to use the _reviewerID_ to know about the top reviewers, _asin_ for recognizing products, the _reviewTime_ to know when these reviews are done, the _overall_ score to match it with the top reviewers, products and also with the _helpful_ field to see if there's any relation between scores and helpfulness. 
+We plan to enrich this dataset with the **Million Song Dataset**, to check if the Digital Music Category products reviews are related with their popularity from the music dataset by matching the _title_ from the Song Dataset with the _title_ from _metadata_ placed in the Amazon Dataset.
 
 
 # A list of internal milestones up until project milestone 2
