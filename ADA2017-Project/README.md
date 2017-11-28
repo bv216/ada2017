@@ -34,5 +34,15 @@ Our calendar is going to be the following:
   
   > **Week 4**: Wrapping analysis, check every comment and prepare documentation to submit this second milestone.
 
+
+# A list of internal milestones up until project milestone 3
+We continue with our plans of meeting and for these weeks we are going to do the following:
+  > **Week 4**: Fill the notebook prepared from milestone 2.
+
+  > **Week 5**: Finishing analysis and preparing notebooks for week 6.
+
+  > **Week 6**: Create the report, review all information collected upto now and create a great report for Milestone 3.
+ 
+
 # Questions for TAa
 No questions at this moment.
