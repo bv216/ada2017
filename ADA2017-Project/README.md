@@ -6,6 +6,7 @@ Analysis of the influence of ratings in Amazon reviews
 This project will analyze the influence of popularity on Amazon reviews from different points of views, such as popularity of the reviewer, of the product and of the amount of reviews for the product. To develop it, we are going to use two datasets, the main one is going to be the **Amazon Reviews Dataset** and its ¬-_metadata_, we will also use some small datasets for complementary analysis.
 For many buyers, it’s clear that reviews are helpful and take part in their purchase decisions but we wonder who do them, is it just because of the motivation of knowing that you are helping someone? 
 These commentary from customers are part of the success of Amazon and our study will let us explore what motivates reviews and which type of buyers get more information from them. 
+An online HTML version of this notebook will be available at: http://morgane.es/Project-Notebook.html for a few months.
 
 
 # Research questions
