@@ -44,7 +44,7 @@ We continue with our plans of meeting and for these weeks we are going to do the
   > **Week 6**: Create the report, review all information collected upto now and create a great report for Milestone 3.
  
  
- # Contributions by member
+ # Contribution by member
  We are a two people group, David Fernández and Briac Virey.  Toguether we have worked on the starting analysis of the problem and the study of data. And then we have divided the rest of the work:
   > **David Fernandez:** Has done work for Question 1 and Question 4 and the clenning of the notebook. It is he who would present the poster.
   > **Briac Virey:** Has worked on Question 2 and Question 3, on conclusions and on the report.
