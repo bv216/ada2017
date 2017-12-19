@@ -17,8 +17,11 @@
 \documentclass[11pt]{article}
 \usepackage{acl2014}
 \usepackage{times}
-\usepackage{url}
+\usepackage[hyphens]{url}
 \usepackage{latexsym}
+\usepackage{graphicx}
+
+\renewcommand{\labelitemi}{$\textendash$}
 
 %\setlength\titlebox{5cm}
 
@@ -27,268 +30,263 @@
 % smaller than 5cm (the original size); we will check this
 % in the camera-ready version and ask you to change it back.
 
+\title{Explanatory analysis of Amazon reviews}
 
-\title{Name of your project}
-
-\author{First Author \\
-  {\tt email@domain} \\\And
-  Second Author \\
-  {\tt email@domain} \\\And
-Third Author \\
-{\tt email@domain} \\}
+\author{Fern\'andez David\\
+  {\tt david.fernandeznavarro@epfl.ch} \\\And
+  Virey Briac\\
+  {\tt briac.virey@epfl.ch} \\}
 
 \date{}
 
 \begin{document}
 \maketitle
+% no longer than 150 words
 \begin{abstract}
-  This document contains the instructions for preparing a report for ADA 2017. The document itself conforms to its own specifications, and is therefore an example of
-  what your manuscript should look like. This document is based on the ACL 2014 paper format.
+
+This report presents the achieved work for the 2017 Applied Data Analysis course at EPFL. The project is based on an Amazon reviews dataset and consists on a detailed explanatory analysis of the data. This document shows the overall process, assumptions and results of such analysis.
+
+The possible influence of other's opinions on one's decision can be taken for granted. The purpose of this research project is to determine whether point of views (such as reviews) can always be relied on.
+
+ 
 \end{abstract}
 
 \section{Credits}
 
-This document has been adapted from the instructions for earlier ACL
-proceedings, including those for ACL-2012 by Maggie Li and Michael
-White, those from ACL-2010 by Jing-Shing Chang and Philipp Koehn,
-those for ACL-2008 by Johanna D. Moore, Simone Teufel, James Allan,
-and Sadaoki Furui, those for ACL-2005 by Hwee Tou Ng and Kemal
-Oflazer, those for ACL-2002 by Eugene Charniak and Dekang Lin, and
-earlier ACL and EACL formats. Those versions were written by several
-people, including John Chen, Henry S. Thompson and Donald
-Walker. Additional elements were taken from the formatting
-instructions of the {\em International Joint Conference on Artificial
-  Intelligence}.
+This project is exclusively based on the {\em Amazon product data} conceived by J. McAuley, UCSD. Instructions and useful advise were given by the Applied Data Analysis (ADA) course instructor, Robert West, EPFL, and the numerous teaching assistants.
 
 \section{Introduction}
-
-The following instructions are directed to the ADA students who decided to prepare a report. Authors are
-required to provide a Portable Document Format (PDF) version of their
-reports. It must be maximum 4-page long, excluding references.
-
-\section{General Instructions}
-
-Manuscripts must be in two-column format.  Exceptions to the
-two-column format include the title, authors' names and complete
-addresses, which must be centered at the top of the first page, and
-any full-width figures or tables (see the guidelines in
-Subsection~\ref{ssec:first}). {\bf Type single-spaced.}  Start all
-pages directly under the top margin. See the guidelines later
-regarding formatting the first page.
-
-\subsection{Format of Electronic Manuscript}
-\label{sect:pdf}
-
-For the production of the electronic manuscript you must use Adobe's
-Portable Document Format (PDF). PDF files are usually produced from
-\LaTeX\ using the \textit{pdflatex} command. If your version of
-\LaTeX\ produces Postscript files, you can convert these into PDF
-using \textit{ps2pdf} or \textit{dvipdf}. On Windows, you can also use
-Adobe Distiller to generate PDF.
-
-Please make sure that your PDF file includes all the necessary fonts
-(especially tree diagrams, symbols, and fonts with Asian
-characters). When you print or create the PDF file, there is usually
-an option in your printer setup to include none, all or just
-non-standard fonts.  Please make sure that you select the option of
-including ALL the fonts. \textbf{Before sending it, test your PDF by
-  printing it from a computer different from the one where it was
-  created.} Moreover, some word processors may generate very large PDF
-files, where each page is rendered as an image. Such images may
-reproduce poorly. In this case, try alternative ways to obtain the
-PDF. One way on some systems is to install a driver for a postscript
-printer, send your document to the printer specifying ``Output to a
-file'', then convert the file to PDF.
-
-It is of utmost importance to specify the \textbf{A4 format} (21 cm
-x 29.7 cm) when formatting the report. When working with
-{\tt dvips}, for instance, one should specify {\tt -t a4}.
-
-Print-outs of the PDF file on A4 report should be identical to the
-hardcopy version.
+The purpose of this report is to analyze the influence of ratings on Amazon.com reviews for all its categories from 1996 to 2014, to check how people rate along time, the relation between price and ratings or category and to see if there is a tendency to rate better those products that usually are more rated. All this knowledge would let us verify some judgments made by the general public including paid critiques on products are not honest, there are more products bought during certain periods so more reviews are done on this time, etc.
+This objective will be reached by using Amazon reviews data frame,  Amazon reviews metadata and enriched with small datasets such us the number of births in the United States of America.
 
 
-\subsection{Layout}
-\label{ssec:layout}
+\section{Related Work}
+The most closely similarly work to ours is the paper where datasets have been taken, written by McAucley J. and Yang A. from  the University of California, San Diego (UCSD) that studies the product-related list that Amazon provides with the customers reviews.
 
-Format manuscripts two columns to a page, in the manner these
-instructions are formatted. The exact dimensions for a page on A4
-report are:
+\section{Data Collection}
+
+The {\em Amazon product data} is composed of product reviews along with metadata files for a 142.8-million-reviews collection of Amazon products for a timespan of almost 20 years. The dataset is available through different subsets (raw, per category, metadata, k-scores, rating-only, etc.).
+
+\paragraph{}
+{\bf Raw data:} (20 GB compressed) corresponds to the 142.8 million reviews; includes duplicate such as reviews for similar product (DVD and VHS).
+
+{\bf K-scores:} (3.2 GB compressed) duplicates removed; each product and reviewer have at least k-reviews; contains {\em reviewerID}, productID ({\em asin}), rating ({\em overall}), timestamp ({\em reviewTime}).
+
+{\bf Ratings only:} (9.9 GB compressed) duplicates removed; same categories as precedent but no constraint on number of reviews.
+
+{\bf Metadata:} (3.1 GB compressed) includes other informations on product such as {\em price, also\_bought, also\_viewed, brand}, etc.
+
+\paragraph{}
+For simplicity reasons, this project was done using {\em ratings only} per category. This enables the exploration of data on a local computer without having to go through the time-consuming process of loading all the data. For some analysis we also need metadata for products for instance, the price of the products.
+
+\section{Data Description}
+
+Considering the 2 tables {\em ratings only} and {\em metadata}, products examined in this project have at least a reviewer, a product ID, a rating and a timestamp (one review per line for each {\em.csv} file), plus a product ID and a price (one product per line).
+
+% Add statistic summary table here
+
+\section{Methodology}
+\paragraph{}
+Methodology followed could be summarized in just a few steps, facing the problem, studying data, working on data and reaching conclusions.
+
+\paragraph{}
+We have started this project by thinking about the general idea, formulating the main questions to be solved before reaching our goals. At the beginning we tried not to be very ambitious because a deeper look to data was still missing. It is also important taking into account that we are a group of only two people, thus the size of the project had to be reduced. With this, and a quick idea of data we have defined some needed fields from the Amazon Reviews.
+
+\paragraph{}
+Then, it was the moment for deeper revisions of samples of data, as we have it available in many different formats, we had to choose which one was the most appropriate with us and our way of working. We decided using the {\em.csv} files for ratings, one file per category, that include the {\em reviewerID, rating, asin, timestamp}. In addition, we are going to use some {\em meatadata} files, one per category, mainly for consulting the price of each product.
+
+\paragraph{}
+Once we know what data to use, we download and organize it. And then, we do a testing on data, accessing files from the notebook, that the data needed is, in effect, on files and finally that it is easy to use.
+
+\paragraph{}
+With the data, we test the accessing and computational speed needed for it. At this moment we decided using our own computers because analysis shows that is feasible.
+
+\paragraph{}
+The exploratory analysis allows us to have a deeper understanding of the data, to extract informations from it, which could alter our initial questions. To proceed, the data is organized as much as possible and, memory and CPU efficient methods are considered although this can be a great challenge. 
+The main lines of research to explore the data (distribution, from one category to another, absolute or relative, etc.) are based on the reviews, the ratings and the price. Because these attributes are taken individually, they are relatively easy to manipulate.
+
+\paragraph{}
+After this investigation process, we decided to modify our initial axis of research and include and temporal scale. This choice was also influenced by the loss of one of our group members on the harsh way to data analysis. Thus, this study is a way to answer the following:
 
 \begin{itemize}
-\item Left and right margins: 2.5 cm
-\item Top margin: 2.5 cm
-\item Bottom margin: 2.5 cm
-\item Column width: 7.7 cm
-\item Column height: 24.7 cm
-\item Gap between columns: 0.6 cm
+\item {\bf Q1:} How has the amount of reviews changed during time? Is this constant on every category?
+\item {\bf Q2:} Is there relation between price of the product and the amount of reviews?
+\item {\bf Q3:} Is there relation between category of the product and the amount of reviews?
+\item {\bf Q4:} Are the people giving more reviews more satisfied with products?
 \end{itemize}
 
-\noindent Papers should not be submitted on any other report size, no exceptions.
+\section{Results}
+
+In the following sections, we present some of the most interesting results, mostly as graphics.
+
+\subsection{Exploratory Analysis}
+
+Through this investigation process, we could derive valuable informations concerning reviews and ratings from the dataset. We also consider a reviews on a varying timescale.
+
+\paragraph{}
+First of all, the distribution of reviews per category is shown in the figure \ref{reviews}. The number of reviews with respect to the number of products per category.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{reviews.png}
+\caption{Number of reviews per category}
+\label{reviews}
+\end{figure}
+
+The values are, in general, in the same range. Categories with high values correspond to technology-related products. Users may be more familiar with the concept of online reviews.
+
+\paragraph{}
+Second part of this analysis focuses on the rating distributions for different categories (figure \ref{ratings}). Once again, these frequency values correspond to a relative frequency with respect to the number of products.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{ratings.png}
+\caption{Number of ratings per category}
+\label{ratings}
+\end{figure}
+
+The rating distribution hardly depends on the category considered. As we can see, it is heavily skewed. The ratings are mostly {\em 5} and most categories have a minimum on ratings {\em 2}.
+
+\paragraph{}
+Finally, we analysed the total number of reviews per year and the results can be seen in the figure {\em\ref{reviews_temp}}. It is clearly visible that the reviews increase with an exponential growth.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{reviews_temp.png}
+\caption{Number of reviews per year}
+\label{reviews_temp}
+\end{figure}
+
+The last year (2014) has a lower value as the dataset stops mid-year. To go further, it would be interesting to see how the number of reviews evolves today, if it keeps increasing or if it meets a limit.
+
+\subsection{Q1}
+
+The goal here is to evaluate the evolution of the number of reviews per year. The graph above gave us a first approach but we want to go in-depth. 
+
+\paragraph{}
+The figure \ref{q1} corresponds to a more detailed view of these reviews per year. This time, we consider the 24 categories in a log-scale to apprehend the variations at the beginning of the timescale. The small decrease during the last year is still visible here.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{q1.png}
+\caption{Number of reviews (log-scale) per year}
+\label{q1}
+\end{figure}
+
+In this figure, we can see how different trends occurred in the early years to merge in one and unique trend. In general, categories related to technology have an odd behaviour. The number of reviews may decrease or suddenly jump from one year to another. This might be associated with the increasing importance of these very same technologies in our lives in the recent years.
 
 
-\subsection{Fonts}
+\subsection{Q2}
+We want to evaluate the relation between price and number of reviews. The following graph (figure \ref{q2c}) shows the scatter plot of each point ({\em price, reviews}) for every categories. The overall trend looks logarithmic. 
 
-For reasons of uniformity, Adobe's {\bf Times Roman} font should be
-used. In \LaTeX2e{} this is accomplished by putting
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{q2c.png}
+\caption{Reviews per price}
+\label{q2c}
+\end{figure}
 
-\begin{quote}
-\begin{verbatim}
-\usepackage{times}
-\usepackage{latexsym}
-\end{verbatim}
-\end{quote}
-in the preamble. If Times Roman is unavailable, use {\bf Computer
-  Modern Roman} (\LaTeX2e{}'s default).  Note that the latter is about
-  10\% less dense than Adobe's Times Roman font.
+From the distribution of price (graph above), we compute the frequency distribution of price. Each frequency is associated with its number of reviews. In the figure \ref{q2d}, we can see the number of reviews as a function of price for the music industry (3 categories). This scheme can be found in other categories. It was plotted with a log-scale. The smaller the price, the more reviews you have. 
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{q2d.png}
+\caption{Products per price {\em Musical Instruments}}
+\label{q2d}
+\end{figure}
 
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{|l|rl|}
-\hline \bf Type of Text & \bf Font Size & \bf Style \\ \hline
-report title & 15 pt & bold \\
-author names & 12 pt & bold \\
-the word ``Abstract'' & 12 pt & bold \\
-section titles & 12 pt & bold \\
-document text & 11 pt  &\\
-captions & 11 pt & \\
-abstract text & 10 pt & \\
-bibliography & 10 pt & \\
-footnotes & 9 pt & \\
-\hline
-\end{tabular}
-\end{center}
-\caption{\label{font-table} Font guide.}
-\end{table}
+\subsection{Q3}
 
-\subsection{The First Page}
-\label{ssec:first}
+Once again, we try here to go from the exploratory analysis to a more detailed analysis. For this purpose, we consider the number of reviews per category (figure \ref{q3}). In these boxplots, the median is green, the edges of the box represent the values that respectively 25 and 75\% of the products have and the wiskers to 5 and 95\%. 
 
-Center the title and author's name(s) across both
-columns. Do not use footnotes for affiliations. Use the
-two-column format only when you begin the abstract.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{q3.png}
+\caption{Number of reviews (log-scale)}
+\label{q3}
+\end{figure}
 
-{\bf Title}: Place the title centered at the top of the first page, in
-a 15-point bold font. (For a complete guide to font sizes and styles,
-see Table~\ref{font-table}) Long titles should be typed on two lines
-without a blank line intervening. Approximately, put the title at 2.5
-cm from the top of the page, followed by a blank line, then the
-author's names(s) on the following line. Do not
-use only initials for given names (middle initials are allowed). Do
-not format surnames in all capitals (e.g., use ``Schlangen'' not
-``SCHLANGEN'').  Do not format title and section headings in all
-capitals as well except for proper names (such as ``BLEU'') that are
-conventionally in all capitals. Start the body of the first page 7.5 cm from the top of the
-page.
+In this plot, all categories have at least 25\% of the products with at least one review. {\em Video Games} is an exception and has more reviews per product (boxplot shifted upwards). We can see that, once again, technology-related categories ({\em Video Games, Apps for Android, Electronics, Amazon Instant Video, Movies and TV,} etc.) tend to have wider boxplots, and thus products with more reviews. This said, {\em Digital Music} has far too much products for them to be all reviewed and other platforms allow to listen to music for free. 
+Unfortunately, the outliers are not visible with too many categories.
 
-{\bf Abstract}: Type the abstract at the beginning of the first
-column. The width of the abstract text should be smaller than the
-width of the columns for the text in the body of the report by about
-0.6 cm on each side. Center the word {\bf Abstract} in a 12 point bold
-font above the body of the abstract. The abstract should be a concise
-summary of the general thesis and conclusions of the report. It should
-be no longer than 150 words. The abstract text should be in 10 point font.
+\subsection{Q4}
 
-{\bf Text}: Begin typing the main body of the text immediately after
-the abstract, observing the two-column format as shown in 
-the present document. Do not include page numbers.
+In this part, we want to see whether the top reviewers have a different rating habit compared to the rest of the reviewers. The figure \ref{q4} is clearly showing that, while the top-20 reviewers tend to give less extreme ratings ({\em 1,2} and {\em 5}), they use more frequently the average grades such as {\em 3} and {\em 4}.
 
-{\bf Indent} when starting a new paragraph. Use 11 points for text and 
-subsection headings, 12 points for section headings and 15 points for
-the title. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1\linewidth]{q4.png}
+\caption{Ratings by (top-)reviewers}
+\label{q4}
+\end{figure}
 
-\subsection{Sections}
+It would be possible to go further into the analysis by, for example, determining in which categories these top reviewers grade mostly, or consider more than 2 types of reviewers.
 
-{\bf Headings}: Type and label section and subsection headings in the
-style shown on the present document.  Use numbered sections (Arabic
-numerals) in order to facilitate cross references. Number subsections
-with the section number and the subsection number separated by a dot,
-in Arabic numerals. Do not number subsubsections.
+\section{Conclusion}
 
-{\bf Citations}: Citations within the text appear in parentheses
-as~\cite{Gusfield:97} or, if the author's name appears in the text
-itself, as Gusfield~\shortcite{Gusfield:97}.  Append lowercase letters
-to the year in cases of ambiguity.  Treat double authors as
-in~\cite{Aho:72}, but write as in~\cite{Chandra:81} when more than two
-authors are involved. Collapse multiple citations as
-in~\cite{Gusfield:97,Aho:72}. Also refrain from using full citations
-as sentence constituents. We suggest that instead of
-\begin{quote}
-  ``\cite{Gusfield:97} showed that ...''
-\end{quote}
-you use
-\begin{quote}
-``Gusfield \shortcite{Gusfield:97}   showed that ...''
-\end{quote}
+Working on this project has been a good training for our data scientific life, we have learned the basics, faced a data problem, and dealt with large datasets.
 
-If you are using the provided \LaTeX{} and Bib\TeX{} style files, you
-can use the command \verb|\newcite| to get ``author (year)'' citations.
+We have proven that both the number of reviews and the number of products reviewed are constantly increasing so that reviews are a key factor for Amazon.
 
-\textbf{Please do not use anonymous citations} and do not include
-acknowledgements when submitting your reports..
+Something we have also learned is that people tend to review (and thus to buy) more cheap products than expensive one in each category.
 
-\textbf{References}: Gather the full set of references together under
-the heading {\bf References}. Arrange the references alphabetically
-by first author, rather than by order of occurrence in the text.
-Provide as complete a citation as possible, using a consistent format,
-such as the one for {\em Computational Linguistics\/} or the one in the 
-{\em Publication Manual of the American 
-Psychological Association\/}~\cite{APA:83}.  Use of full names for
-authors rather than initials is preferred.  A list of abbreviations
-for common computer science journals can be found in the ACM 
-{\em Computing Reviews\/}~\cite{ACM:83}.
+From question three, we could say that even though the number of reviews per product is similar between categories, there are some that out stands from the others (in particular for technology-related products).
 
-\subsection{Footnotes}
+And about satisfaction, we can definitely say that yes, those with more reviews tend to rate better, the rarely use low scores.
 
-{\bf Footnotes}: Put footnotes at the bottom of the page and use 9
-points text. They may be numbered or referred to by asterisks or other
-symbols.\footnote{This is how a footnote should appear.} Footnotes
-should be separated from the text by a line.\footnote{Note the line
-separating the footnotes from the text.}
+Handling the data, we have learned many methods that use less time and memory and so are more efficient. This can be seen along the code, with important improvements on data structures. Also that the drop of a member was a difficulty but we knew how to face it!
 
-\subsection{Graphics}
+Finally, is this useful for social good? Definitely yes! It`s clear that reviews are helpful and take part in their purchase decisions, but they are not only done because of the motivation of knowing that you are helping someone, but also because of money and free products sometimes, so take care about what you buy and don't be influenced only by one opinion but by a mix of them, taking into account the pros and cons of products.
 
-{\bf Illustrations}: Place figures, tables, and photographs in the
-report near where they are first discussed, rather than at the end, if
-possible.  Wide illustrations may run across both columns.
-
-{\bf Captions}: Provide a caption for every illustration; number each one
-sequentially in the form:  ``Figure 1. Caption of the Figure.'' ``Table 1.
-Caption of the Table.''  Type the captions of the figures and 
-tables below the body, using 11 point text.
+% I don't know why, the references are not ordered as they should
 
 \begin{thebibliography}{}
 
-\bibitem[\protect\citename{Aho and Ullman}1972]{Aho:72}
-Alfred~V. Aho and Jeffrey~D. Ullman.
-\newblock 1972.
-\newblock {\em The Theory of Parsing, Translation and Compiling}, volume~1.
-\newblock Prentice-{Hall}, Englewood Cliffs, NJ.
+\bibitem[\protect\citename{chen}2017]{Chen:17}
+Chen Y.
+\newblock 2017.
+\newblock {\em Confessions of a paid Amazon review writer} [online].
+\newblock Digiday
+\newblock \url{https://digiday.com/marketing/vendors-ask-go-around-policy-confessions-top-ranked-amazon-review-writer/} [Accessed 8 Dec. 2017].
 
-\bibitem[\protect\citename{{American Psychological Association}}1983]{APA:83}
-{American Psychological Association}.
-\newblock 1983.
-\newblock {\em Publications Manual}.
-\newblock American Psychological Association, Washington, DC.
+\bibitem[\protect\citename{data}2017]{Data:17}
+Data.un.org.
+\newblock 2017.
+\newblock {\em UNdata | record view | Live births by month of birth} [online].
+\newblock \url{http://data.un.org/Data.aspx?d=POP&f=tableCode%3A55} [Accessed 14 Dec. 2017].
 
-\bibitem[\protect\citename{{Association for Computing Machinery}}1983]{ACM:83}
-{Association for Computing Machinery}.
-\newblock 1983.
-\newblock {\em Computing Reviews}, 24(11):503--512.
+\bibitem[\protect\citename{hall}2017]{Hall:17}
+Hall M.
+\newblock 2017.
+\newblock {\em Amazon.com | History \& Facts} [online].
+\newblock Encyclopedia Britannica
+\newblock \url{https://www.britannica.com/topic/Amazoncom} [Accessed 11 Dec. 2017].
 
-\bibitem[\protect\citename{Chandra \bgroup et al.\egroup }1981]{Chandra:81}
-Ashok~K. Chandra, Dexter~C. Kozen, and Larry~J. Stockmeyer.
-\newblock 1981.
-\newblock Alternation.
-\newblock {\em Journal of the Association for Computing Machinery},
-  28(1):114--133.
+\bibitem[\protect\citename{he}2016]{He:16}
+He R. and McAuley J.
+\newblock 2016.
+\newblock {\em Modeling the visual evolution of fashion trends with one-class collaborative filtering}.
+\newblock WWW.
 
-\bibitem[\protect\citename{Gusfield}1997]{Gusfield:97}
-Dan Gusfield.
-\newblock 1997.
-\newblock {\em Algorithms on Strings, Trees and Sequences}.
-\newblock Cambridge University Press, Cambridge, UK.
+\bibitem[\protect\citename{mcauley}2015]{McAuley:15}
+McAuley J.; Targett C.; Shi J. and van den Hengel  A.
+\newblock 2015.
+\newblock {\em Image-based recommendations on styles and substitutes}.
+\newblock SIGIR.
+
+\bibitem[\protect\citename{quinn}2015]{quinn:15}
+Quinn J.
+\newblock 2015.
+\newblock {\em Amazon timeline: from internet bookshop to the world's biggest online retailer} [online].
+\newblock Telegraph
+\newblock \url{http://www.telegraph.co.uk/technology/amazon/11801515/Amazon-timeline-from-internet-bookshop-to-the-worlds-biggest-online-retailer.html} [Accessed 5 Dec. 2017].
+
+
+\bibitem[\protect\citename{dlab}2017]{dlab:17}
+West Robert.
+\newblock 2017.
+\newblock {\em Applied Data Analysis (ADA)} [online].
+\newblock \url{https://dlab.epfl.ch/teaching/fall2017/cs401/} [Accessed 14 Dec. 2017].
 
 \end{thebibliography}
 
